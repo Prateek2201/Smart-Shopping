@@ -1,0 +1,81 @@
+
+<style>
+  .returnHomepage{
+    width:200px;
+    padding: 5px;
+    height:50px;
+    font-size:20px;
+    background-color: blue;
+    color: white;
+    margin-left: 1500px;
+  }
+  .viewDesc{
+    width:200px;
+    padding: 5px;
+    margin:2px;
+    height:50px;
+    font-size:20px;
+    background-color: black;
+    color: white;
+  }
+  .delete{
+    width:200px;
+    padding: 5px;
+    height:50px;
+    font-size:20px;
+  }
+  .minus,.plus{
+    background-color: slateblue;
+    color:white;
+    font-size: 20px;
+    height:30px;
+    width:30px;
+  }
+  .emptyCart
+  {
+    text-align: center;
+    font-size: 30px;
+    font-family: 'Times New Roman', Times, serif;
+    color: gray;
+    border:2px solid darkgrey;
+    width: 600px;
+    height: 400px;
+    border-radius: 10px;
+    margin-top: 100px;
+    margin-left: 500px;
+  }
+  p{
+    font-size: 30px;
+  }
+</style>
+<% if(userCartProducts.length===0) { %>
+  <div class="emptyCart">
+    <h2>No products added to cart yet!</h2>
+    <a href="/home"><button class="delete">Shop Now</button></a>
+</div>
+<% } %>
+<h1><a href="/home"><button class="returnHomepage">HomePage</button></a></h1>
+<center>
+  <% userCartProducts.forEach(function(cartProduct) { %>
+  <div style="border:1px solid red;width:400px;margin:2px;">
+    <p><%= cartProduct.pid %></p>
+    
+    <img src="<%= cartProduct.image %>" style="height:100px;width:100px;">
+    <p><%= cartProduct.pname %></p>
+    <p>Price: <%= cartProduct.price %></p>
+    <p>
+        Quantity: <%= cartProduct.quantity %>
+        <% if(cartProduct.quantity<=1){ %>
+          <a><button disabled class="minus">-</button></a>  
+        <% }else{ %>
+          <a href="/minusQuantity?productID=<%=cartProduct.pid%>"><button class="minus">-</button></a>
+        <% } %>
+        <a href="/plusQuantity?productID=<%=cartProduct.pid%>"><button class="plus">+</button></a>
+    </p>
+    <p>
+        <a href="/deleteFromCart?productID=<%=cartProduct.pid%>"><button class="delete">Delete</button></a>
+        <a href="/viewDescCart?productID=<%=cartProduct.pid%>"><button class="viewDesc">View Desc</button></a>
+    </p>
+  </div>
+<% }) %>
+</center>

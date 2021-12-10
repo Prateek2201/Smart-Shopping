@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="/styles/home.css">
+    <title></title>
+  </head>
+  <body>
+    <div style="background: goldenrod;height:100px;width:100%">
+      <div style="float:left;padding:10px;width:1200px;">
+        <h1 class="title">Welcome to Smart Shopping Site</h1>
+      </div>
+      <div style="float:left;margin-top:20px;">
+        <a href="/login">
+          <button type="button" class="login" style="width:200px; padding:5px; height:50px; background-color:yellow; color:blue;font-size:20px;">
+            Login
+          </button>
+        </a>
+      </div>
+      <div style="float:left;margin-left:20px;margin-top:20px;">
+        <a href="/signup">
+          <button type="button" class="signup" style="width:200px; padding:5px; height:50px; background-color:yellow; color:blue;font-size:20px;">
+            Signup
+          </button>
+        </a>
+      </div>
+    </div>
+    <center>
+      <% products.forEach(function(product) { %>
+        <div style="border:2px solid grey;width:1000px;margin:2px;">
+          <div><img src="<%= product.image %>" style="height:300px;width:300px;display:block;"></div>
+          <div><h2 style="display:block;"><%= product.name %></h2></div>
+          <div>
+            <a href="/addToCart?productID=<%=product.id%>"><button class="addCart">Add to Cart</button></a>
+          </div>
+          <div>
+            <a href="/viewDesc?productID=<%=product.id%>"><button class="viewDesc">View Desc</button></a>
+          </div>
+        </div>
+      <% }) %>
+      <% if(!(products.length % productsPerPage)){ %>
+        <a href="/?page_no=<%= page_no %>">
+          <button type="button" name="button" id="loadMore">Load more</button>
+        </a>
+      <% } %>
+      </center>
+  </body>
+</html>

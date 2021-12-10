@@ -1,0 +1,55 @@
+<style>
+  .title{
+    background-color:wheat;
+    color:red;
+    text-align:center;
+    height:50px;
+    margin:0px;
+    padding:25px;
+    font-size:40px;
+  }
+  .addCart{
+  width:200px;
+  padding: 5px;
+  margin:2px;
+  height:50px;
+  font-size:20px;
+  background-color: black;
+  color: white;
+}
+.viewDesc, .loadMore{
+  width:200px;
+  padding: 5px;
+  height:50px;
+  font-size:20px;
+  background-color: gray;
+  color: white;
+}
+.goToCart{
+  width:200px;
+  padding: 5px;
+  height:50px;
+  font-size:20px;
+  background-color: blue;
+  color: white;
+  margin-left: 1500px;
+}
+</style>
+<h1 class="title">Welcome to Smart Shopping Site</h1>
+<%- include('partials/header',{user:user}) %>
+<h1><a href="/viewCart"><button class="goToCart">Go To Cart</button></a></h1>
+<center>
+  <% products.forEach(function(product) { %>
+  <div style="border:2px solid grey;width:1000px;margin:5px;padding:5px;">
+    <img src="<%= product.image %>" style="height:300px;width:300px;">
+    <h2 style="font-size:25px;"><%= product.name %></h2>
+    <p><a href="/addToCart?productID=<%=product.id%>"><button class="addCart">Add to Cart</button></a>
+    <a href="/viewDesc?productID=<%=product.id%>"><button class="viewDesc">View Desc</button></a></p>
+  </div>
+<% }) %>
+<% if(!(products.length % productsPerPage)){ %>
+<a href="/home?page_no=<%= page_no %>">
+  <button type="button" class="loadMore" id="loadMore">Load more</button>
+</a>
+<% } %>
+</center>
